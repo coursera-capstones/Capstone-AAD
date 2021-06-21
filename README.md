@@ -12,6 +12,6 @@
   - BroadCast Receiver
   - Service
 
-# API URL
+#API URL
   - https://coronavirus-smartable.p.rapidapi.com/stats/v1/US/
 
