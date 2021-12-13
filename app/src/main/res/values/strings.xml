@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">CapstoneApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sign_in_screen_title_text">Sign In</string>
+    <string name="text_field_fullName_hint">FullName</string>
+    <string name="text_field_email_hint">Email</string>
+    <string name="text_field_password_hint">Password</string>
+    <string name="text_field_confirm_password_hint">Confirm password</string>
+    <string name="sign_up_screen_title_text">Sign up</string>
+    <string name="email_field_error_toast">Email field should not be empty!</string>
+    <string name="password_field_error_toast">Password field should not be empty!</string>
+    <string name="confirm_password_field_error_toast">Password confirmation\'s field should not be empty!</string>
+    <string name="password_validation_error_toast">Please! Enter the same password.</string>
+    <string name="save_user_data_error_toast">Failed to save user\'s data. Please, try again</string>
+    <string name="auth_user_data_error_toast">Login failure !</string>
+    <string name="statistics">Statistics</string>
+    <string name="history">History</string>
+    <string name="settings">settings</string>
+    <string name="population_text">Population:</string>
+    <string name="deaths_label">Deaths</string>
+    <string name="recovered_label">Recovered</string>
+    <string name="active_label">Active</string>
+    <string name="new_cases_label">Total case</string>
+    <string name="tests_label">Tests</string>
+    <string name="statistic_api_call_error">Failed to get statistic data. Please check your internet connection and try again later.</string>
+    <string name="select_country_hint">Select country to filter history data</string>
+    <string name="user_connected_text">Online</string>
+    <string name="user_offline_text">Offline</string>
+    <string name="selected_country_toast">Selected country: </string>
+    <string name="status">Status</string>
+    <string name="country_label">Country:</string>
+    <string name="history_api_call_error">Failed to get history data. Please check your internet connection and try again later.</string>
+    <string name="continent_label">Continent</string>
+</resources>
