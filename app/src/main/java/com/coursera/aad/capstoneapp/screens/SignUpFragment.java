@@ -1,13 +1,13 @@
 package com.coursera.aad.capstoneapp.screens;
 
+import static com.coursera.aad.capstoneapp.utils.Utils.isValidSignUpData;
+
 import android.content.Context;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,7 +25,6 @@ public class SignUpFragment extends Fragment {
     private View root;
     private String email, pass;
     private OnSignUpFragmentListener listener;
-
     private TextInputLayout emailField;
     private TextInputLayout passwordField;
     private Button btnSignUp;
@@ -87,7 +86,10 @@ public class SignUpFragment extends Fragment {
     private void initListener() {
         try {
             btnSignUp.setOnClickListener(view -> {
-                if (isValidUserInput()) {
+                String email = Objects.requireNonNull(emailField.getEditText()).getText().toString().trim();
+                String pass = Objects.requireNonNull(passwordField.getEditText()).getText().toString().trim();
+
+                if (isValidSignUpData(requireContext(), email, pass)) {
                     // Notify activity, and load nest fragment
                     listener.onSignUp(email, pass);
                 }
@@ -95,39 +97,6 @@ public class SignUpFragment extends Fragment {
         } catch (Exception e) {
             Timber.e(e);
         }
-    }
-
-    /**
-     * Check user input
-     * @return True if user's input are valid. Otherwise, false
-     */
-    private boolean isValidUserInput() {
-        try {
-            email = Objects.requireNonNull(emailField.getEditText()).getText().toString().trim();
-            pass = Objects.requireNonNull(passwordField.getEditText()).getText().toString().trim();
-
-            if (TextUtils.isEmpty(email)) {
-                Toast.makeText(requireContext(),
-                        requireContext().getString(R.string.email_field_error_toast),
-                        Toast.LENGTH_SHORT).show();
-
-                return false;
-            }
-
-            if (TextUtils.isEmpty(pass)) {
-                Toast.makeText(requireContext(),
-                        requireContext().getString(R.string.password_field_error_toast),
-                        Toast.LENGTH_SHORT).show();
-
-                return false;
-            }
-        } catch (Exception e) {
-            Timber.e(e);
-
-            return false;
-        }
-
-        return true;
     }
 
     public interface OnSignUpFragmentListener {

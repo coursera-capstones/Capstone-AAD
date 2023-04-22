@@ -1,5 +1,13 @@
 package com.coursera.aad.capstoneapp.screens;
 
+import static android.app.DownloadManager.STATUS_FAILED;
+import static android.app.DownloadManager.STATUS_RUNNING;
+import static android.app.DownloadManager.STATUS_SUCCESSFUL;
+import static com.coursera.aad.capstoneapp.utils.Constants.COMMAND_EXTRA;
+import static com.coursera.aad.capstoneapp.utils.Constants.QUERY_EXTRA;
+import static com.coursera.aad.capstoneapp.utils.Constants.RECEIVER_EXTRA;
+import static com.coursera.aad.capstoneapp.utils.Constants.RESULTS_EXTRA;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -23,17 +31,10 @@ import com.coursera.aad.capstoneapp.services.StatisticsIntentService;
 import com.coursera.aad.capstoneapp.services.resultReceiver.StatisticsServiceResultReceiver;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import timber.log.Timber;
-
-import static android.app.DownloadManager.STATUS_FAILED;
-import static android.app.DownloadManager.STATUS_RUNNING;
-import static android.app.DownloadManager.STATUS_SUCCESSFUL;
-import static com.coursera.aad.capstoneapp.utils.Constants.COMMAND_EXTRA;
-import static com.coursera.aad.capstoneapp.utils.Constants.QUERY_EXTRA;
-import static com.coursera.aad.capstoneapp.utils.Constants.RECEIVER_EXTRA;
-import static com.coursera.aad.capstoneapp.utils.Constants.RESULTS_EXTRA;
 
 public class StatisticsFragment extends Fragment implements
         StatisticsServiceResultReceiver.StatisticResultReceiver {
@@ -113,6 +114,7 @@ public class StatisticsFragment extends Fragment implements
                     List<Statistic> list = getStatistic(data);
                     if (list != null && !list.isEmpty()) {
                         results.addAll(list);
+                        results.sort(Comparator.comparing(Statistic::getCountry));
                         adapter.updateContent(results);
                         recyclerView.setVisibility(View.VISIBLE);
                         tvApiCallError.setVisibility(View.GONE);

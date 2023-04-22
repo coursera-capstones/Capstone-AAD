@@ -1,5 +1,7 @@
 package com.coursera.aad.capstoneapp.screens;
 
+import static com.coursera.aad.capstoneapp.utils.Utils.selectedCountry;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -20,8 +22,6 @@ import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import java.util.List;
 
 import timber.log.Timber;
-
-import static com.coursera.aad.capstoneapp.utils.Utils.selectedCountry;
 
 public class SettingsFragment extends Fragment {
 
@@ -77,6 +77,9 @@ public class SettingsFragment extends Fragment {
                         requireContext()
                                 .getString(R.string.user_offline_text));
             }
+            if (!TextUtils.isEmpty(selectedCountry)) {
+                autoCompleteDropdown.setText(selectedCountry);
+            }
             new Handler().postDelayed(this::initCountryDropdown, 2000);
         } catch (Exception e) {
             Timber.e(e);
@@ -86,6 +89,10 @@ public class SettingsFragment extends Fragment {
     private void initCountryDropdown() {
         try {
             List<String> countries = MainActivity.countryDao.readAll();
+            if (countries == null || countries.isEmpty()) {
+                autoCompleteDropdown.setEnabled(false);
+                return;
+            }
             ArrayAdapter<String> adapter = new ArrayAdapter<>(
                     requireContext(), R.layout.country_item, countries);
             autoCompleteDropdown.setAdapter(adapter);
@@ -93,9 +100,6 @@ public class SettingsFragment extends Fragment {
                 String country = countries.get(position);
                 selectedCountry = country.toLowerCase();
             });
-            if (!TextUtils.isEmpty(selectedCountry)) {
-                autoCompleteDropdown.setText(selectedCountry);
-            }
         } catch (Exception e) {
             Timber.e(e);
         }

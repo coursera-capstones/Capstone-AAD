@@ -1,10 +1,14 @@
 package com.coursera.aad.capstoneapp.utils;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.coursera.aad.capstoneapp.R;
+import com.coursera.aad.capstoneapp.models.User;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -53,5 +57,85 @@ public class Utils {
             Timber.e(e);
             return "";
         }
+    }
+
+    /**
+     * Check user input
+     * @return True if user's input are valid. Otherwise, false
+     */
+    public static boolean isValidSignUpData(Context context, String email, String pass) {
+        try {
+            if (email == null || email.isEmpty()) {
+                Toast.makeText(context,
+                        context.getString(R.string.email_field_error_toast),
+                        Toast.LENGTH_SHORT).show();
+
+                return false;
+            }
+
+            if (pass == null || pass.isEmpty()) {
+                Toast.makeText(context,
+                        context.getString(R.string.password_field_error_toast),
+                        Toast.LENGTH_SHORT).show();
+
+                return false;
+            }
+        } catch (Exception e) {
+            Timber.e(e);
+
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Check user input
+     * @return True if user's input are valid. Otherwise, false
+     */
+    public static boolean isValidSignInData(Context context, User user, String passConfirm) {
+        try {
+            if (user == null || context == null) {
+                return false;
+            }
+
+            if (user.getEmail() == null || user.getEmail().isEmpty()) {
+                Toast.makeText(context,
+                        context.getString(R.string.email_field_error_toast),
+                        Toast.LENGTH_SHORT).show();
+
+                return false;
+            }
+
+            if (user.getPassword() == null || user.getPassword().isEmpty()) {
+                Toast.makeText(context,
+                        context.getString(R.string.password_field_error_toast),
+                        Toast.LENGTH_SHORT).show();
+
+                return false;
+            }
+
+            if (passConfirm == null || passConfirm.isEmpty()) {
+                Toast.makeText(context,
+                        context.getString(R.string.confirm_password_field_error_toast),
+                        Toast.LENGTH_SHORT).show();
+
+                return false;
+            }
+
+            if (!user.getPassword().trim().equalsIgnoreCase(passConfirm.trim())) {
+                Toast.makeText(context,
+                        context.getString(R.string.password_validation_error_toast),
+                        Toast.LENGTH_SHORT).show();
+
+                return false;
+            }
+        } catch (Exception e) {
+            Timber.e(e);
+
+            return false;
+        }
+
+        return true;
     }
 }

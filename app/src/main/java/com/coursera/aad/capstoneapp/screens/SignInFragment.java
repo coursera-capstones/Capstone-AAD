@@ -1,13 +1,13 @@
 package com.coursera.aad.capstoneapp.screens;
 
+import static com.coursera.aad.capstoneapp.utils.Utils.isValidSignInData;
+
 import android.content.Context;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -112,60 +112,26 @@ public class SignInFragment extends Fragment {
      * @return True if user's input are valid. Otherwise, false
      */
     private boolean isValidUserInput() {
-        String fullName;
-        String password;
-        String email;
         try {
-            fullName = Objects.requireNonNull(fullNameField.getEditText()).getText().toString();
-            email = Objects.requireNonNull(emailField.getEditText()).getText().toString();
-            password = Objects.requireNonNull(passwordField.getEditText()).getText().toString();
+            String fullName = Objects.requireNonNull(fullNameField.getEditText()).getText().toString();
+            String email = Objects.requireNonNull(emailField.getEditText()).getText().toString();
+            String password = Objects.requireNonNull(passwordField.getEditText()).getText().toString();
             String confirmPassword = Objects.requireNonNull(confirmPasswordField.getEditText()).getText().toString();
 
-            if (TextUtils.isEmpty(email)) {
-                Toast.makeText(requireContext(),
-                        requireContext().getString(R.string.email_field_error_toast),
-                        Toast.LENGTH_SHORT).show();
+            user = new User();
+            user.setFullName(fullName);
+            user.setEmail(email);
+            user.setPassword(password);
+            user.setSignIn(true);
+            user.setStatus(1);
 
-                return false;
-            }
+            return isValidSignInData(requireContext(), user, confirmPassword);
 
-            if (TextUtils.isEmpty(password)) {
-                Toast.makeText(requireContext(),
-                        requireContext().getString(R.string.password_field_error_toast),
-                        Toast.LENGTH_SHORT).show();
-
-                return false;
-            }
-
-            if (TextUtils.isEmpty(confirmPassword)) {
-                Toast.makeText(requireContext(),
-                        requireContext().getString(R.string.confirm_password_field_error_toast),
-                        Toast.LENGTH_SHORT).show();
-
-                return false;
-            }
-
-            if (!password.trim().equalsIgnoreCase(confirmPassword.trim())) {
-                Toast.makeText(requireContext(),
-                        requireContext().getString(R.string.password_validation_error_toast),
-                        Toast.LENGTH_SHORT).show();
-
-                return false;
-            }
         } catch (Exception e) {
             Timber.e(e);
 
             return false;
         }
-
-        user = new User();
-        user.setFullName(fullName);
-        user.setEmail(email);
-        user.setPassword(password);
-        user.setSignIn(true);
-        user.setStatus(1);
-
-        return true;
     }
 
     public interface OnSignInFragmentListener {

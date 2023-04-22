@@ -1,5 +1,7 @@
 package com.coursera.aad.capstoneapp.services;
 
+import static com.coursera.aad.capstoneapp.MainActivity.countryDao;
+
 import android.app.IntentService;
 import android.content.Intent;
 import android.os.Handler;
@@ -16,8 +18,6 @@ import java.util.List;
 
 import retrofit2.Response;
 import timber.log.Timber;
-
-import static com.coursera.aad.capstoneapp.MainActivity.countryDao;
 
 public class CountriesIntentService extends IntentService {
 
@@ -65,7 +65,6 @@ public class CountriesIntentService extends IntentService {
     }
 
     private void saveCountriesToDB(CountryDao countryDao) {
-        countryDao.deleteAll();
         countryDao.insertAll(countries);
     }
 

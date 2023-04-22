@@ -1,6 +1,10 @@
 package com.coursera.aad.capstoneapp.screens;
 
+import static com.coursera.aad.capstoneapp.utils.Utils.loadFragmentToFrameLayout;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,20 +14,25 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.coursera.aad.capstoneapp.MainActivity;
 import com.coursera.aad.capstoneapp.R;
+import com.coursera.aad.capstoneapp.services.CountriesIntentService;
+import com.coursera.aad.capstoneapp.services.resultReceiver.CountriesResultReceiver;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import timber.log.Timber;
 
-import static com.coursera.aad.capstoneapp.utils.Utils.loadFragmentToFrameLayout;
-
-public class CovidNewsFragment extends Fragment {
+public class CovidNewsFragment extends Fragment implements CountriesResultReceiver.OnResultReceiverListener {
 
     private FrameLayout frameLayout;
     private BottomNavigationView navigationView;
-
     private View root = null;
     private int currentView = 0;
+    private CountriesResultReceiver resultReceiver;
+    private List<String> listOfCountries = new ArrayList<>();
 
     public CovidNewsFragment() {
         // Required empty public constructor
@@ -32,6 +41,22 @@ public class CovidNewsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try {
+            List<String> countries = MainActivity.countryDao.readAll();
+            if (countries == null || countries.isEmpty()) {
+                // Initialize intentService's result receiver
+                resultReceiver = new CountriesResultReceiver(new Handler());
+                resultReceiver.setResultReceiver(this);
+                // Create service's intent
+                Intent intent = new Intent(
+                        Intent.ACTION_SYNC, null,
+                        requireContext(), CountriesIntentService.class);
+                // Start service
+                requireActivity().startService(intent);
+            }
+        } catch (Exception e) {
+            Timber.e(e);
+        }
     }
 
     @Override
@@ -103,5 +128,10 @@ public class CovidNewsFragment extends Fragment {
         } catch (Exception e) {
             Timber.e(e);
         }
+    }
+
+    @Override
+    public void onReceiveCountriesResult(int resultCode, Bundle data) {
+
     }
 }

@@ -75,7 +75,7 @@
         android:layout_width="match_parent"
         android:fontFamily="@font/source_sans_pro_regular"
         android:hint="@string/select_country_hint"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 

@@ -1,5 +1,7 @@
 package com.coursera.aad.capstoneapp;
 
+import static com.coursera.aad.capstoneapp.utils.Utils.loadFragmentToFrameLayout;
+
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -15,8 +17,6 @@ import com.coursera.aad.capstoneapp.screens.SignInFragment;
 import com.coursera.aad.capstoneapp.screens.SignUpFragment;
 
 import timber.log.Timber;
-
-import static com.coursera.aad.capstoneapp.utils.Utils.loadFragmentToFrameLayout;
 
 public class MainActivity extends AppCompatActivity implements
         SignInFragment.OnSignInFragmentListener,
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements
                            this,
                            R.id.layoutContainer,
                            new SignUpFragment());
-               } else { // User has already connected
+               } else { // User connected
                    // Load news fragment
                    loadFragmentToFrameLayout(
                            this,

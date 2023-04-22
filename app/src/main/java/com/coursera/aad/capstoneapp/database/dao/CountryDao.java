@@ -1,5 +1,8 @@
 package com.coursera.aad.capstoneapp.database.dao;
 
+import static com.coursera.aad.capstoneapp.utils.Constants.COLUMN_NAME;
+import static com.coursera.aad.capstoneapp.utils.Constants.COUNTRIES_TABLE_NAME;
+
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,9 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import timber.log.Timber;
-
-import static com.coursera.aad.capstoneapp.utils.Constants.COLUMN_NAME;
-import static com.coursera.aad.capstoneapp.utils.Constants.COUNTRIES_TABLE_NAME;
 
 public class CountryDao {
 
@@ -35,7 +35,7 @@ public class CountryDao {
                 // Insert country into database
                 res = mDB.insertWithOnConflict(COUNTRIES_TABLE_NAME,
                         null, getContentValue(),
-                        SQLiteDatabase.CONFLICT_IGNORE) > 0;
+                        SQLiteDatabase.CONFLICT_REPLACE) > 0;
 
                 Thread.sleep(200);
             }
