@@ -102,7 +102,7 @@ public class Utils {
             if (user.getEmail() == null || user.getEmail().isEmpty()) {
                 Toast.makeText(context,
                         context.getString(R.string.email_field_error_toast),
-                        Toast.LENGTH_SHORT).show();
+                        Toast.LENGTH_LONG).show();
 
                 return false;
             }
@@ -110,7 +110,7 @@ public class Utils {
             if (user.getPassword() == null || user.getPassword().isEmpty()) {
                 Toast.makeText(context,
                         context.getString(R.string.password_field_error_toast),
-                        Toast.LENGTH_SHORT).show();
+                        Toast.LENGTH_LONG).show();
 
                 return false;
             }
@@ -118,7 +118,7 @@ public class Utils {
             if (passConfirm == null || passConfirm.isEmpty()) {
                 Toast.makeText(context,
                         context.getString(R.string.confirm_password_field_error_toast),
-                        Toast.LENGTH_SHORT).show();
+                        Toast.LENGTH_LONG).show();
 
                 return false;
             }
@@ -126,7 +126,7 @@ public class Utils {
             if (!user.getPassword().trim().equalsIgnoreCase(passConfirm.trim())) {
                 Toast.makeText(context,
                         context.getString(R.string.password_validation_error_toast),
-                        Toast.LENGTH_SHORT).show();
+                        Toast.LENGTH_LONG).show();
 
                 return false;
             }

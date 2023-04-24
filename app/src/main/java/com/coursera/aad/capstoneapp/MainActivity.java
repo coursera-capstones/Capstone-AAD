@@ -89,6 +89,9 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
+    /**
+     * Initialized the views used in this activity
+     */
     private void initView() {
        try {
            // Check if the user is connected or not

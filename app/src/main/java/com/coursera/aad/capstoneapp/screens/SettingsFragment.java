@@ -57,6 +57,9 @@ public class SettingsFragment extends Fragment {
         }
     }
 
+    /**
+     * Initialized the views used in this fragment
+     */
     private void initView() {
         try {
             // Initialize views
@@ -86,6 +89,9 @@ public class SettingsFragment extends Fragment {
         }
     }
 
+    /**
+     * This function initializes a dropdown menu in the UI of the app
+     */
     private void initCountryDropdown() {
         try {
             List<String> countries = MainActivity.countryDao.readAll();

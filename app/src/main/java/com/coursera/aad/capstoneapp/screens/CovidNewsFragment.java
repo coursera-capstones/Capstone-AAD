@@ -79,6 +79,9 @@ public class CovidNewsFragment extends Fragment implements CountriesResultReceiv
         }
     }
 
+    /**
+     * Initialized the views used in this fragment
+     */
     private void initView() {
         try {
             // Find view by ID
@@ -92,6 +95,9 @@ public class CovidNewsFragment extends Fragment implements CountriesResultReceiv
         }
     }
 
+    /**
+     * Initialize the interaction listener on the views used in this fragment
+     */
     private void initListener() {
         try {
             navigationView.setOnItemSelectedListener(item -> {
@@ -118,6 +124,11 @@ public class CovidNewsFragment extends Fragment implements CountriesResultReceiv
         }
     }
 
+    /**
+     * This function is used to load a given Fragment into the
+     * FrameLayout of this fragment
+     * @param fragment The fragment to be loaded
+     */
     private void loadView(Fragment fragment) {
         try {
             // Load statistics fragment
@@ -131,7 +142,5 @@ public class CovidNewsFragment extends Fragment implements CountriesResultReceiv
     }
 
     @Override
-    public void onReceiveCountriesResult(int resultCode, Bundle data) {
-
-    }
+    public void onReceiveCountriesResult(int resultCode, Bundle data) { }
 }

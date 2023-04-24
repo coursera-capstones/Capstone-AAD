@@ -72,6 +72,9 @@ public class SignUpFragment extends Fragment {
         listener = null;
     }
 
+    /**
+     * Initialized the views used in this fragment
+     */
     private void initView() {
         try {
             // Get view by ID
@@ -83,6 +86,9 @@ public class SignUpFragment extends Fragment {
         }
     }
 
+    /**
+     * Initialize the interaction listener on the views used in this fragment
+     */
     private void initListener() {
         try {
             btnSignUp.setOnClickListener(view -> {

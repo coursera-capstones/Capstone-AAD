@@ -1,5 +1,19 @@
 package com.coursera.aad.capstoneapp.screens;
 
+import static android.app.DownloadManager.STATUS_FAILED;
+import static android.app.DownloadManager.STATUS_RUNNING;
+import static android.app.DownloadManager.STATUS_SUCCESSFUL;
+import static com.coursera.aad.capstoneapp.utils.Constants.COMMAND_EXTRA;
+import static com.coursera.aad.capstoneapp.utils.Constants.COUNTRY_EXTRA;
+import static com.coursera.aad.capstoneapp.utils.Constants.DATE_FORMAT;
+import static com.coursera.aad.capstoneapp.utils.Constants.DAY_EXTRA;
+import static com.coursera.aad.capstoneapp.utils.Constants.QUERY_EXTRA;
+import static com.coursera.aad.capstoneapp.utils.Constants.RECEIVER_EXTRA;
+import static com.coursera.aad.capstoneapp.utils.Constants.RESULTS_EXTRA;
+import static com.coursera.aad.capstoneapp.utils.Utils.getCurrentDate;
+import static com.coursera.aad.capstoneapp.utils.Utils.getDeviceDefaultCountryName;
+import static com.coursera.aad.capstoneapp.utils.Utils.selectedCountry;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,20 +41,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import timber.log.Timber;
-
-import static android.app.DownloadManager.STATUS_FAILED;
-import static android.app.DownloadManager.STATUS_RUNNING;
-import static android.app.DownloadManager.STATUS_SUCCESSFUL;
-import static com.coursera.aad.capstoneapp.utils.Constants.COMMAND_EXTRA;
-import static com.coursera.aad.capstoneapp.utils.Constants.COUNTRY_EXTRA;
-import static com.coursera.aad.capstoneapp.utils.Constants.DATE_FORMAT;
-import static com.coursera.aad.capstoneapp.utils.Constants.DAY_EXTRA;
-import static com.coursera.aad.capstoneapp.utils.Constants.QUERY_EXTRA;
-import static com.coursera.aad.capstoneapp.utils.Constants.RECEIVER_EXTRA;
-import static com.coursera.aad.capstoneapp.utils.Constants.RESULTS_EXTRA;
-import static com.coursera.aad.capstoneapp.utils.Utils.getCurrentDate;
-import static com.coursera.aad.capstoneapp.utils.Utils.getDeviceDefaultCountryName;
-import static com.coursera.aad.capstoneapp.utils.Utils.selectedCountry;
 
 public class HistoryFragment extends Fragment implements
         HistoryServiceResultReceiver.HistoryResultReceiver {
@@ -146,6 +146,13 @@ public class HistoryFragment extends Fragment implements
         }
     }
 
+    /**
+     * This function can be used to extract a list of History
+     * objects from a Bundle object that has been passed between
+     * components in the app.
+     * @param bundle It takes a Bundle object as a parameter.
+     * @return a list of History objects
+     */
     private List<History> getHistory(Bundle bundle) {
         try {
             List<History> histories = new ArrayList<>();
@@ -161,6 +168,9 @@ public class HistoryFragment extends Fragment implements
         }
     }
 
+    /**
+     * Initialized the views used in this fragment
+     */
     private void initView() {
         try {
             tvApiCallError = root.findViewById(R.id.text_error);
@@ -177,6 +187,10 @@ public class HistoryFragment extends Fragment implements
         }
     }
 
+    /**
+     * This function initializes the History RecyclerView by
+     * setting up its adapter, layout manager, and fixed size.
+     */
     private void initRecyclerView() {
         try {
             adapter = new HistoryViewAdapter(requireContext(), results);

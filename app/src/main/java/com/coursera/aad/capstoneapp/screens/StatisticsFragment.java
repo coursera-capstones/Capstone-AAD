@@ -135,6 +135,13 @@ public class StatisticsFragment extends Fragment implements
         }
     }
 
+    /**
+     * This function can be used to extract a list of Statistic
+     * objects from a Bundle object that has been passed between
+     * components in an Android app.
+     * @param bundle It takes a Bundle object as a parameter.
+     * @return a list of Statistic objects
+     */
     private List<Statistic> getStatistic(Bundle bundle) {
         try {
             List<Statistic> statistics = new ArrayList<>();
@@ -150,6 +157,9 @@ public class StatisticsFragment extends Fragment implements
         }
     }
 
+    /**
+     * Initialized the views used in this fragment
+     */
     private void initView() {
         try {
             tvApiCallError = root.findViewById(R.id.text_error);
@@ -166,6 +176,10 @@ public class StatisticsFragment extends Fragment implements
         }
     }
 
+    /**
+     * This function initializes the Statistics RecyclerView by
+     * setting up its adapter, layout manager, and fixed size.
+     */
     private void initRecyclerView() {
         try {
             adapter = new StatisticsViewAdapter(requireContext(), results);
