@@ -19,6 +19,9 @@ task _answerZip(type:Zip) {
     include '.idea/**'
     exclude '.idea/workspace.xml'
     exclude '.idea/libraries'
+    include 'screen-record/**'
+    include 'README.md'
+    include 'LICENSE'
     destinationDir file('zip')
 }
 
